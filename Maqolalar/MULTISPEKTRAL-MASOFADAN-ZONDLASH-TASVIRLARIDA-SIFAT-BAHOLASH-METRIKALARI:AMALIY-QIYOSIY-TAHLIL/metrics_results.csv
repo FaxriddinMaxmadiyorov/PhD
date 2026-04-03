@@ -1,0 +1,77 @@
+# ═══════════════════════════════════════════════════════════════
+# EuroSAT Residential — Sifat Baholash Metrikalari (Haqiqiy Hisob)
+# Dataset,dataset/EuroSATallBands/Residential
+# Tasvirlar soni,50
+# Bandlar,B2(490nm) B3(560nm) B4(665nm) B8(842nm) B11(1610nm) B12(2190nm)
+# Seed,42
+# ───────────────────────────────────────────────────────────────
+# Metrika ta'riflari:
+# PSNR,"dB, YUQORI yaxshi. >40 a'lo, 30–40 yaxshi, <30 qoniqarsiz"
+# SSIM,"0–1, YUQORI yaxshi. 1=ideal; yorug'lik+kontrast+struktura"
+# SAM,"daraja, PAST yaxshi. 0=ideal spektral mos; impulsiv shovqinda yanglishi mumkin"
+# ERGAS,"past yaxshi. <3 a'lo, 3–5 yaxshi; pan-sharpening standart metrikasi"
+# SNR,"dB, YUQORI yaxshi. >20 dB qabul qilinadi"
+# BRISQUE,"0–100, PAST yaxshi. No-ref; MSCN-asosli; multispektralga moslashtirilgan"
+# Entropy_dH,"|H_ref-H_dist| bits, PAST yaxshi. Blur kamaytiradi; shovqin oshiradi"
+# NCC,"0–1, YUQORI yaxshi. 1=ideal; intensivlik siljishiga sezgir emas"
+# ═══════════════════════════════════════════════════════════════
+
+## 1. UMUMIY NATIJALAR (barcha tasvirlar bo'yicha o'rtacha)
+Buzilish_turi,Guruh,PSNR,SSIM,SAM,ERGAS,SNR,BRISQUE,Entropy_dH,NCC
+Gaussian (σ=0.02),Gaussian,34.1004,0.9845,2.6775,5.0334,27.5146,16.8036,0.0652,0.9991
+Gaussian (σ=0.05),Gaussian,26.223,0.9197,6.4444,12.4538,19.6382,12.9886,0.063,0.9943
+Gaussian (σ=0.10),Gaussian,20.3574,0.7755,12.2363,24.4306,13.772,9.9412,0.0615,0.9786
+Blur (σ=1),Blur,23.0986,0.7799,8.6758,24.4802,16.5144,12.6926,0.1819,0.9786
+Blur (σ=2),Blur,18.1906,0.4555,12.8679,36.552,11.6054,13.7192,0.4844,0.9504
+Blur (σ=3),Blur,16.3918,0.2789,14.8508,42.1692,9.8064,25.9862,0.738,0.9329
+Kompressiya (20%),Kompressiya,53.2888,0.9995,0.6514,1.2574,46.7044,21.8692,0.0323,0.9999
+Kompressiya (40%),Kompressiya,43.6584,0.9954,1.8372,3.8118,37.0728,20.8474,0.0492,0.9995
+Kompressiya (60%),Kompressiya,37.0932,0.9808,3.6263,7.9938,30.5082,18.2742,0.0545,0.9977
+Stripe (σ=0.02),Stripe,34.22,0.9865,2.6609,4.9992,27.6342,17.3728,0.0588,0.9991
+Stripe (σ=0.05),Stripe,26.2284,0.9296,6.4988,12.5324,19.6426,13.6704,0.0517,0.9943
+Tuz-Murch (p=0.02),Tuz-Murch,21.8448,0.8711,1.2055,20.8246,15.26,100.0,0.0494,0.9844
+
+"## 2. BAND BO'YICHA NATIJALAR (birinchi tasvir, Gaussian shovqin)"
+Buzilish_turi,Metrika,B2_Kok_490nm,B3_Yashil_560nm,B4_Qizil_665nm,B8_NIR_842nm,B11_SWIR1_1610nm,B12_SWIR2_2190nm
+Gaussian (σ=0.02),PSNR,34.2285,34.2708,34.0587,34.1458,34.0113,34.163
+Gaussian (σ=0.02),SSIM,0.9927,0.9926,0.9935,0.9936,0.9755,0.9816
+Gaussian (σ=0.02),SAM,2.2237,2.0921,2.0247,1.9586,1.8699,1.9805
+Gaussian (σ=0.02),ERGAS,5.6729,5.7854,4.8245,4.1504,3.9356,4.3875
+Gaussian (σ=0.02),SNR,26.3577,26.2241,27.4423,28.609,28.8196,28.1584
+Gaussian (σ=0.02),BRISQUE,20.8088,19.8458,11.2824,6.3942,9.6298,12.2469
+Gaussian (σ=0.02),Entropy_dH,0.0961,0.0728,0.0499,0.0585,0.0879,0.065
+Gaussian (σ=0.02),NCC,0.9988,0.9988,0.9991,0.9993,0.9993,0.9992
+Gaussian (σ=0.05),PSNR,26.2676,26.2336,26.1724,26.2624,26.2666,26.0676
+Gaussian (σ=0.05),SSIM,0.9558,0.9553,0.9626,0.9611,0.8761,0.8906
+Gaussian (σ=0.05),SAM,3.0803,2.9263,2.4642,2.4197,2.0017,2.3539
+Gaussian (σ=0.05),ERGAS,14.1856,14.5947,11.961,10.2862,9.5993,11.1424
+Gaussian (σ=0.05),SNR,18.3968,18.1869,19.556,20.7257,21.0749,20.0631
+Gaussian (σ=0.05),BRISQUE,17.9205,16.5823,9.0189,6.2423,7.7856,8.1787
+Gaussian (σ=0.05),Entropy_dH,0.1181,0.0887,0.082,0.0487,0.112,0.0683
+Gaussian (σ=0.05),NCC,0.9928,0.9925,0.9945,0.9958,0.9961,0.9951
+Gaussian (σ=0.10),PSNR,20.4769,20.3326,20.3209,20.2534,20.2512,20.18
+Gaussian (σ=0.10),SSIM,0.8549,0.8492,0.8709,0.8624,0.6593,0.7046
+Gaussian (σ=0.10),SAM,5.5408,4.9257,3.8042,3.4083,2.6616,3.2767
+Gaussian (σ=0.10),ERGAS,27.6302,28.79,23.4607,20.5451,19.1872,21.9462
+Gaussian (σ=0.10),SNR,12.606,12.286,13.7045,14.7166,15.0595,14.1755
+Gaussian (σ=0.10),BRISQUE,10.7582,11.8986,7.7183,6.9961,8.981,8.4521
+Gaussian (σ=0.10),Entropy_dH,0.0695,0.0788,0.0711,0.0194,0.1438,0.0646
+Gaussian (σ=0.10),NCC,0.9734,0.9717,0.9794,0.9834,0.9846,0.9813
+
+## 3. METRIKA YO'NALISHLARI
+Metrika,Tur,Yo'nalish,Formula (qisqacha),Izoh
+PSNR,Full-ref,YUQORI↑,10·log10(1/MSE),>40 a'lo; blur sezmasligi mumkin
+SSIM,Full-ref,YUQORI↑,"l·c·s, 0≤SSIM≤1",Inson ko'ziga eng yaqin metrika
+SAM,Full-ref,PAST↓,"arccos(<x,y>/(||x||·||y||))",Impulsiv shovqinda paradoks beradi
+ERGAS,Full-ref,PAST↓,(h/l)·100·sqrt(Σ(RMSE/μ)²),Pan-sharpening standart; μ≈0 bandlarda kengayishi mumkin
+SNR,Full-ref,YUQORI↑,10·log10(Σx²/Σe²),Gaussian shovqin uchun ideal
+BRISQUE,No-ref,PAST↓,MSCN kurt+skew (moslashtirilgan),Etalon kerak emas; blur va shovqin uchun
+Entropy_dH,No-ref,PAST↓,"|H_ref-H_dist|, H=-Σp·log2(p)",BLUR: ΔH katta; GAUSSIAN: ΔH katta — tur farqlash uchun boshqa metrika bilan birga
+NCC,Full-ref,YUQORI↑,Σ(x·y)/sqrt(Σx²·Σy²),Intensivlik siljishiga sezgir emas; kalibratsiya uchun foydali
+
+## 4. PARADOKS VA ANOMALIYALAR
+Buzilish,Metrika1,Qiymat1,Metrika2,Qiymat2,Izoh
+Tuz-Murch (p=0.02),PSNR,21.8448,SAM,1.2055,"PSNR past lekin SAM past — 2% piksel ekstremalni, 98% spektr o'zgarmagan"
+Tuz-Murch (p=0.02),PSNR,21.8448,Entropy_dH,0.0494,Impulsiv shovqin entropy farqini oshiradi
+Kompressiya (20%),PSNR,53.2888,BRISQUE,21.8692,"PSNR=49.6 a'lo, lekin BRISQUE=100 — bloking artefakt sezilmaydi"
+Blur (σ=3),Entropy_dH,0.738,BRISQUE,25.9862,Blur entropy kamaytiradi (ΔH katta) va BRISQUE ham yuqori

@@ -1,0 +1,18 @@
+Fayl      : dataset/Forest/Forest_2.tif
+Strategiya: bm3d
+Kanallar  : 13
+
+   kanal          turi      sigma*           usul      AQI
+      B1           n/a    0.000019           bm3d        -
+      B2           n/a    0.000650           bm3d        -
+      B3           n/a    0.001213           bm3d        -
+      B4           n/a    0.000781           bm3d        -
+      B5           n/a    0.000029           bm3d        -
+      B6           n/a    0.000036           bm3d        -
+      B7           n/a    0.000036           bm3d        -
+      B8           n/a    0.007795           bm3d        -
+     B8A           n/a    0.000024           bm3d        -
+      B9           n/a    0.000007           bm3d        -
+     B10           n/a    0.000029           bm3d        -
+     B11           n/a    0.000027           bm3d        -
+     B12           n/a    0.000037           bm3d        -

@@ -1,0 +1,22 @@
+=======================================================
+BUZILISH TURI KLASSIFIKATSIYA NATIJALARI
+=======================================================
+
+Umumiy aniqlik (Overall Accuracy): 0.8693  (86.93%)
+
+Sinf bo'yicha aniqlik:
+----------------------------------------
+  Gaussian         0.6770  (67.7%)
+  Blur             1.0000  (100.0%)
+  Compress         0.9052  (90.5%)
+  Stripe           0.8422  (84.2%)
+  Salt-pepper      1.0000  (100.0%)
+
+Confusion matrix (absolut qiymatlar):
+----------------------------------------
+         Gaussi    Blur  Compre  Stripe  Salt-p
+  Gaussian   914       0     384      52       0
+  Blur         0    1350       0       0       0
+  Compress    96       0    1222      32       0
+  Stripe      33       0     109     758       0
+  Salt-pepper     0       0       0       0     450

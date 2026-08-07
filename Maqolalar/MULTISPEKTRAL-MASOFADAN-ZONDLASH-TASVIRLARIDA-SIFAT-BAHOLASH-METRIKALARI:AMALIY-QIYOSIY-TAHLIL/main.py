@@ -626,11 +626,11 @@ def fig1_distortions(first_img, results, out="figure1_distortions.png"):
     np.random.seed(42)
     fig = plt.figure(figsize=(16.5, 10.0), facecolor=BG)
     fig.text(0.5, 0.982,
-             "EuroSAT Residential — Birinchi Tasvir + 12 Buzilgan Versiya",
+             "EuroSAT Residential — First Image + 12 Distorted Versions",
              ha='center', fontsize=13, fontweight='bold', color=TEXT)
     fig.text(0.5, 0.965,
-             "Sentinel-2 haqiqiy tasvir · Etalon: RGB (B4-B3-B2, xom) · "
-             "Buzilganlar: B4-B3-B2 stretched · PSNR (dB) to'g'ri burchakda · SAM pastda",
+             "Sentinel-2 real image · Reference: RGB (B4-B3-B2, raw) · "
+             "Distorted: B4-B3-B2 stretched · PSNR (dB) top-right · SAM bottom",
              ha='center', fontsize=8.5, color=MUTED)
 
     ROWS, COLS = 3, 5
@@ -671,7 +671,7 @@ def fig1_distortions(first_img, results, out="figure1_distortions.png"):
                     transform=ax.transAxes, ha='center', va='top',
                     fontsize=7.0, color='#cccccc')
         else:
-            ax.text(0.5, -0.04, "Asl tasvir (etalon)",
+            ax.text(0.5, -0.04, "Original image (reference)",
                     transform=ax.transAxes, ha='center', va='top',
                     fontsize=7.0, color='#888888')
 
@@ -701,11 +701,11 @@ def fig2_metrics(results, n_images, out="figure2_metrics.png"):
     fig, axes = plt.subplots(2, 4, figsize=(22, 11.5), facecolor=BG)
     fig.subplots_adjust(left=0.045, right=0.985, top=0.90, bottom=0.11,
                         hspace=0.52, wspace=0.28)
-    fig.suptitle(f"8 Metrikaning 12 Buzilish Turiga Bog'liqligi  "
-                 f"(n={n_images} ta haqiqiy Sentinel-2 tasvir o'rtachasi)",
+    fig.suptitle(f"Dependence of 8 Metrics on 12 Distortion Types  "
+                 f"(n={n_images} real Sentinel-2 images average)",
                  fontsize=13, fontweight='bold', color=TEXT, y=0.965)
     fig.text(0.5, 0.932,
-             "Qiymatlar haqiqiy EuroSAT tasvirlardan hisoblangan — hardcode emas",
+             "Values calculated from real EuroSAT images — not hardcoded",
              ha='center', fontsize=8.5, color=MUTED)
 
     for ai, mkey in enumerate(METRICS):
@@ -734,8 +734,8 @@ def fig2_metrics(results, n_images, out="figure2_metrics.png"):
         # Annotatsiyalar
         if mkey == "SAM":
             ax.annotate(
-                f"⚠ SAM paradoksi\nPSNR={results[LABELS[tm_idx]]['PSNR']:.1f} dB\n"
-                f"lekin SAM={vals[tm_idx]:.2f}°",
+                f"⚠ SAM paradox\nPSNR={results[LABELS[tm_idx]]['PSNR']:.1f} dB\n"
+                f"but SAM={vals[tm_idx]:.2f}°",
                 xy=(xpos[tm_idx], vals[tm_idx]),
                 xytext=(xpos[tm_idx] - 2.8, vals.max() * 0.75),
                 fontsize=7, color='#c77dff', fontweight='bold',
@@ -746,7 +746,7 @@ def fig2_metrics(results, n_images, out="figure2_metrics.png"):
         if mkey == "Entropy_dH":
             blur_idxs = sorted([i for i, g in enumerate(GROUPS) if g == "Blur"])
             ax.annotate(
-                f"Blur: entropy ↓\n(detallar yo'qoladi)\nΔH={vals[blur_idxs[-1]]:.3f}",
+                f"Blur: entropy ↓\n(detail loss)\nΔH={vals[blur_idxs[-1]]:.3f}",
                 xy=(xpos[blur_idxs[-1]], vals[blur_idxs[-1]]),
                 xytext=(xpos[blur_idxs[-1]] - 3.0, vals.min() + (vals.max() - vals.min()) * 0.6),
                 fontsize=7, color='#4da6ff',
@@ -754,7 +754,7 @@ def fig2_metrics(results, n_images, out="figure2_metrics.png"):
                           boxstyle='round,pad=0.3', alpha=0.85),
                 arrowprops=dict(arrowstyle='->', color='#4da6ff', lw=1.0))
             ax.annotate(
-                f"⚠ Tuz-Murch:\nΔH={vals[tm_idx]:.3f} (yuqori!)",
+                f"⚠ Salt-pepper:\nΔH={vals[tm_idx]:.3f} (high!)",
                 xy=(xpos[tm_idx], vals[tm_idx]),
                 xytext=(xpos[tm_idx] - 3.5, vals.min()),
                 fontsize=7, color='#c77dff',
@@ -765,7 +765,7 @@ def fig2_metrics(results, n_images, out="figure2_metrics.png"):
         if mkey == "NCC":
             blur_idxs = sorted([i for i, g in enumerate(GROUPS) if g == "Blur"])
             ax.annotate(
-                f"Blur σ=3:\nNCC={vals[blur_idxs[-1]]:.4f} (eng past)",
+                f"Blur σ=3:\nNCC={vals[blur_idxs[-1]]:.4f} (lowest)",
                 xy=(xpos[blur_idxs[-1]], vals[blur_idxs[-1]]),
                 xytext=(xpos[blur_idxs[-1]] - 3.0, vals.min()),
                 fontsize=7, color='#4da6ff',
@@ -776,7 +776,7 @@ def fig2_metrics(results, n_images, out="figure2_metrics.png"):
         if mkey == "BRISQUE":
             k_idxs = sorted([i for i, g in enumerate(GROUPS) if g == "Kompressiya"])
             ax.text(0.98, 0.97,
-                    f"Kompressiya:\nBRISQUE={vals[k_idxs[0]]:.0f} (sezmir!)",
+                    f"Compression:\nBRISQUE={vals[k_idxs[0]]:.0f} (insensitive!)",
                     transform=ax.transAxes, ha='right', va='top', fontsize=7,
                     color='#ffd166',
                     bbox=dict(facecolor='#1e2530', edgecolor='#ffd166',
@@ -827,22 +827,22 @@ def fig3_bands(band_res, n_images, out="figure3_bands.png"):
 
     band_labels_used = BAND_LABELS[:n_bands]
     titles = {
-        "PSNR":       "PSNR — band bo'yicha",
-        "SSIM":       "SSIM — band bo'yicha",
-        "SAM":        "SAM — band bo'yicha",
-        "ERGAS":      "ERGAS — band bo'yicha",
-        "SNR":        "SNR — band bo'yicha",
-        "BRISQUE":    "BRISQUE — band bo'yicha",
-        "Entropy_dH": "Entropy ΔH — band bo'yicha\n(shovqin ↑ entropy, blur ↓ entropy)",
-        "NCC":        "NCC — band bo'yicha\n(intensivlik siljishiga sezgir emas)",
+        "PSNR":       "PSNR — per band",
+        "SSIM":       "SSIM — per band",
+        "SAM":        "SAM — per band",
+        "ERGAS":      "ERGAS — per band",
+        "SNR":        "SNR — per band",
+        "BRISQUE":    "BRISQUE — per band",
+        "Entropy_dH": "Entropy ΔH — per band\n(noise ↑ entropy, blur ↓ entropy)",
+        "NCC":        "NCC — per band\n(insensitive to intensity shift)",
     }
 
     fig, axes = plt.subplots(2, 4, figsize=(22, 11.5), facecolor=BG)
     fig.subplots_adjust(left=0.045, right=0.985, top=0.90, bottom=0.12,
                         hspace=0.52, wspace=0.30)
     fig.suptitle(
-        f"Gaussian Shovqin Ta'sirida 8 Metrika — Spektral Band Bo'yicha  "
-        f"(n={n_images} ta tasvir o'rtachasi)",
+        f"Gaussian Noise Effect on 8 Metrics — Per Spectral Band  "
+        f"(n={n_images} images average)",
         fontsize=13, fontweight='bold', color=TEXT, y=0.965)
     fig.text(0.5, 0.932,
              "B2=Ko'k(490nm)  B3=Yashil(560nm)  B4=Qizil(665nm)  "
@@ -893,7 +893,7 @@ def fig3_bands(band_res, n_images, out="figure3_bands.png"):
 
         ax.set_xticks(x)
         ax.set_xticklabels(band_labels_used, fontsize=7.5, color='#4da6ff', ha='center')
-        ax.set_xlabel("Spektral band", color='#4da6ff', fontsize=9, labelpad=4)
+        ax.set_xlabel("Spectral band", color='#4da6ff', fontsize=9, labelpad=4)
         ax.set_ylim(yl)
         ax.set_ylabel(METRIC_YLABELS[mkey], color=MUTED, fontsize=9)
         ax.set_title(titles[mkey], color=TEXT, fontsize=9.5, fontweight='bold', pad=6)
@@ -921,11 +921,11 @@ def fig4_heatmap(results, n_images, out="figure4_heatmap.png"):
     fig, ax = plt.subplots(figsize=(14, 8), facecolor=BG)
     fig.subplots_adjust(left=0.18, right=0.86, top=0.90, bottom=0.14)
     fig.suptitle(
-        f"Normalizatsiya Qilingan Samaradorlik Matritsasi (8 Metrika, n={n_images})",
+        f"Normalized Quality Matrix (8 Metrics, n={n_images})",
         fontsize=13, fontweight='bold', color=TEXT, y=0.97)
     fig.text(0.53, 0.93,
-             "Yashil=yuqori sifat · Qizil=past sifat · Entropy_dH=ΔH past yaxshi · "
-             "Ajratuvchi chiziq: eski 6 | yangi 2",
+             "Green=high quality · Red=low quality · Entropy_dH=ΔH low quality · "
+             "Separating line: old 6 | new 2",
              ha='center', fontsize=8, color=MUTED)
 
     cmap = mcolors.LinearSegmentedColormap.from_list(
@@ -950,7 +950,7 @@ def fig4_heatmap(results, n_images, out="figure4_heatmap.png"):
 
     # Yangi metrikalar ajratuvchi chiziq
     ax.axvline(5.5, color='#ffd166', linewidth=1.5, linestyle='--', alpha=0.6)
-    ax.text(6.5, -0.75, "Yangi metrikalar →",
+    ax.text(6.5, -0.75, "New metrics →",
             ha='center', fontsize=8, color='#ffd166', fontweight='bold')
 
     ax.set_xticks(range(8))
@@ -964,7 +964,7 @@ def fig4_heatmap(results, n_images, out="figure4_heatmap.png"):
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
     cbar = plt.colorbar(im, ax=ax, pad=0.01, fraction=0.018)
-    cbar.set_label("Normalizatsiya qilingan sifat (1=yaxshi)", color=MUTED, fontsize=8)
+    cbar.set_label("Normalized quality (1=high)", color=MUTED, fontsize=8)
     cbar.ax.tick_params(colors=MUTED)
 
     plt.savefig(out, dpi=150, bbox_inches='tight', facecolor=BG)
@@ -974,7 +974,7 @@ def fig4_heatmap(results, n_images, out="figure4_heatmap.png"):
 
 # ═══════════════════════════════════════════════════════════════
 # 5-RASM: Metrika tanlash yo'riqnomasi
-# ═══════════════════════════════════════════════════════════════
+# ══════════════════════════════════════════
 
 def fig5_flowchart(out="figure5_flowchart.png"):
     import matplotlib.pyplot as plt
@@ -982,7 +982,7 @@ def fig5_flowchart(out="figure5_flowchart.png"):
 
     fig, ax = plt.subplots(figsize=(16, 10.5), facecolor=BG)
     ax.set_facecolor(BG); ax.set_xlim(0, 16); ax.set_ylim(0, 10.5); ax.axis('off')
-    fig.suptitle("Metrika Tanlash Yo'riqnomasi — 8 Metrika (+Entropy ΔH, +NCC)",
+    fig.suptitle("Metric Selection Guide — 8 Metrics (+Entropy ΔH, +NCC)",
                  fontsize=13, fontweight='bold', color=TEXT, y=0.97)
 
     def box(x, y, w, h, text, color, fcolor='#1e2530', fs=8.5, bold=False):
@@ -1007,21 +1007,21 @@ def fig5_flowchart(out="figure5_flowchart.png"):
             ax.text((x1 + x2) / 2 + 0.1, (y1 + y2) / 2, label,
                     fontsize=7.5, color=color, fontweight='bold')
 
-    box(8.0, 10.0, 3.5, 0.7, "BOSHLASH\nSifat baholash vazifasi", '#44ff88', bold=True)
+    box(8.0, 10.0, 3.5, 0.7, "START\nQuality assessment task", '#44ff88', bold=True)
     arrow(8.0, 9.65, 8.0, 9.0)
-    diamond(8.0, 8.7, 4.0, 0.8, "Etalon (referens)\ntasvir mavjudmi?")
+    diamond(8.0, 8.7, 4.0, 0.8, "Reference image\navailable?")
     arrow(8.0, 8.3, 8.0, 7.65)
-    ax.text(8.18, 8.0, "Ha", fontsize=8, color='#44ff88', fontweight='bold')
+    ax.text(8.18, 8.0, "Yes", fontsize=8, color='#44ff88', fontweight='bold')
     arrow(10.0, 8.7, 13.5, 8.7, color='#ff6b6b')
-    ax.text(11.3, 8.88, "Yo'q", fontsize=8, color='#ff6b6b', fontweight='bold')
-    box(13.5, 8.7, 2.8, 0.85, "NR metrikalar:\nSNR + BRISQUE\n+ Entropy ΔH", '#4da6ff')
+    ax.text(11.3, 8.88, "No", fontsize=8, color='#ff6b6b', fontweight='bold')
+    box(13.5, 8.7, 2.8, 0.85, "NR metrics:\nSNR + BRISQUE\n+ Entropy ΔH", '#4da6ff')
 
-    diamond(8.0, 7.35, 4.5, 0.8, "Vazifa turi nima?")
+    diamond(8.0, 7.35, 4.5, 0.8, "What is the task type?")
 
     # Spektral
     arrow(5.75, 7.35, 3.2, 7.35, color='#06d6a0')
-    ax.text(3.9, 7.52, "Spektral\ntasniflash", fontsize=7.5, color='#06d6a0')
-    box(2.2, 7.35, 2.8, 0.8, "SAM (birlamchi)\n+ SSIM + NCC", '#06d6a0')
+    ax.text(3.9, 7.52, "Spectral\nclassification", fontsize=7.5, color='#06d6a0')
+    box(2.2, 7.35, 2.8, 0.8, "SAM (primary)\n+ SSIM + NCC", '#06d6a0')
 
     # Pan-sharpening
     arrow(8.0, 6.95, 8.0, 6.3)
@@ -1030,25 +1030,25 @@ def fig5_flowchart(out="figure5_flowchart.png"):
 
     # Kalibratsiya
     arrow(10.25, 7.35, 12.5, 6.6, color='#4da6ff')
-    ax.text(10.8, 7.12, "Kalibratsiya /\natm. korreksiya", fontsize=7.5, color='#4da6ff')
-    box(12.8, 6.3, 2.8, 0.75, "NCC (birlamchi)\n+ PSNR + SNR", '#4da6ff')
+    ax.text(10.8, 7.12, "Calibration /\natm. correction", fontsize=7.5, color='#4da6ff')
+    box(12.8, 6.3, 2.8, 0.75, "NCC (primary)\n+ PSNR + SNR", '#4da6ff')
 
     # Umumiy
     arrow(5.75, 6.75, 3.8, 5.8, color='#ff6b6b')
-    ax.text(4.2, 6.5, "Umumiy sifat", fontsize=7.5, color='#ff6b6b')
+    ax.text(4.2, 6.5, "General quality", fontsize=7.5, color='#ff6b6b')
     box(3.2, 5.5, 2.8, 0.75, "SSIM + PSNR\n+ SAM + NCC", '#ff6b6b')
 
     arrow(8.0, 5.62, 8.0, 4.98)
-    diamond(8.0, 4.68, 4.5, 0.8, "Buzilish turi ma'lummi?")
-    ax.text(8.18, 4.32, "Ha", fontsize=8, color='#44ff88', fontweight='bold')
+    diamond(8.0, 4.68, 4.5, 0.8, "Is the type of distortion known?")
+    ax.text(8.18, 4.32, "Yes", fontsize=8, color='#44ff88', fontweight='bold')
     arrow(8.0, 4.28, 8.0, 3.65)
 
     buzz = [
-        (1.6,  "Gaussian\nshovqin",    "PSNR + SNR\n+ Entropy ΔH",        '#ff6b6b'),
+        (1.6,  "Gaussian\nnoise",      "PSNR + SNR\n+ Entropy ΔH",            '#ff6b6b'),
         (4.3,  "Blur",                 "SSIM + SAM\n+ BRISQUE + Entropy ΔH↓", '#4da6ff'),
-        (8.0,  "Kompressiya",          "ERGAS + BRISQUE\n+ NCC",          '#ffd166'),
-        (11.7, "Stripe\nshovqin",      "BRISQUE + SSIM\n+ PSNR",          '#06d6a0'),
-        (14.4, "Tuz-Murch",            "PSNR + ERGAS + NCC\n⚠ SAM yolg'iz\nishlatma!", '#c77dff'),
+        (8.0,  "Compression",          "ERGAS + BRISQUE\n+ NCC",              '#ffd166'),
+        (11.7, "Stripe\nnoise",        "BRISQUE + SSIM\n+ PSNR",              '#06d6a0'),
+        (14.4, "Salt-pepper",          "PSNR + ERGAS + NCC\n⚠ Do not use\nSAM alone!", '#c77dff'),
     ]
     for bx, blabel, mrec, bc in buzz:
         box(bx, 3.3, 2.6, 0.75, blabel, bc, fs=7.5)
@@ -1056,20 +1056,20 @@ def fig5_flowchart(out="figure5_flowchart.png"):
         arrow(bx, 2.92, bx, 2.67, color=bc)
 
     ax.text(8.0, 1.28,
-            "💡 Entropy ΔH:\n"
-            "   Blur → ΔH katta (entropy kamaytiradi)   "
-            "Gaussian/Tuz-Murch → ΔH katta (entropy oshiradi)\n"
-            "   → Entropy ΔH yolg'iz buzilish turini farqlamaydi; boshqa metrika bilan birga ishlating.",
-            ha='center', fontsize=8, color='#4da6ff',
-            bbox=dict(facecolor='#0d1a2a', edgecolor='#4da6ff',
-                      boxstyle='round,pad=0.4', alpha=0.92))
+        "💡 Entropy ΔH:\n"
+        "   Blur → ΔH large (reduces entropy)   "
+        "Gaussian/Salt-pepper → ΔH large (increases entropy)\n"
+        "   → Entropy ΔH alone cannot distinguish distortion types; use alongside other metrics.",
+        ha='center', fontsize=8, color='#4da6ff',
+        bbox=dict(facecolor='#0d1a2a', edgecolor='#4da6ff',
+                  boxstyle='round,pad=0.4', alpha=0.92))
 
     ax.text(8.0, 0.32,
-            "⚠  Qoida: Kamida 2–3 metrikani birga qo'llang — "
-            "bitta metrika asosida qaror qabul qilmang!",
+            "⚠  Rule: Always use at least 2–3 metrics together — "
+            "never make decisions based on a single metric!",
             ha='center', fontsize=9, color='#ffcc00', fontweight='bold',
             bbox=dict(facecolor='#1a1a00', edgecolor='#ffcc00',
-                      boxstyle='round,pad=0.4'))
+                    boxstyle='round,pad=0.4'))
 
     plt.savefig(out, dpi=150, bbox_inches='tight', facecolor=BG)
     plt.close()
@@ -1094,7 +1094,7 @@ def fig6_divergence(results, n_images, out="figure6_divergence.png"):
 
     fig = plt.figure(figsize=(18, 10), facecolor=BG)
     fig.suptitle(
-        f"8 Metrika Divergensiyasi — Korrelyatsiya va Paradoks Tahlili  (n={n_images})",
+        f"8 Metric Divergence — Correlation and Paradox Analysis  (n={n_images})",
         fontsize=13, fontweight='bold', color=TEXT, y=0.97)
     gs = gridspec.GridSpec(2, 3, figure=fig, left=0.07, right=0.97,
                            top=0.90, bottom=0.08, hspace=0.50, wspace=0.35)
@@ -1112,15 +1112,15 @@ def fig6_divergence(results, n_images, out="figure6_divergence.png"):
                  markeredgecolor='white', markeredgewidth=0.5)
     ax1.axvspan(tm_idx - 0.5, tm_idx + 0.5, alpha=0.12, color='#c77dff', zorder=0)
     ax1.text(tm_idx, 1.12,
-             f"⚠ Paradoks:\nPSNR={results[LABELS[tm_idx]]['PSNR']:.1f} dB\n"
+             f"⚠ Paradox:\nPSNR={results[LABELS[tm_idx]]['PSNR']:.1f} dB\n"
              f"SAM={results[LABELS[tm_idx]]['SAM']:.2f}°\n"
              f"NCC={results[LABELS[tm_idx]]['NCC']:.4f}",
              ha='center', fontsize=7.5, color='#c77dff', fontweight='bold')
     ax1.set_xticks(xr)
     ax1.set_xticklabels(sl, fontsize=7.5, color=MUTED, rotation=40, ha='right')
     ax1.set_ylim(-0.05, 1.25)
-    ax1.set_ylabel("Normalizatsiya qilingan sifat", color=MUTED, fontsize=9)
-    ax1.set_title("Barcha 8 Metrika — Normalizatsiya Qilingan Ko'rsatkichlar",
+    ax1.set_ylabel("Normalized quality score", color=MUTED, fontsize=9)
+    ax1.set_title("All 8 Metrics — Normalized Scores",
                   color=TEXT, fontsize=10, fontweight='bold')
     ax1.legend(fontsize=7.5, frameon=True, loc='upper left', ncol=4,
                facecolor='#1e2530', edgecolor=GRID, labelcolor=TEXT)
@@ -1146,7 +1146,7 @@ def fig6_divergence(results, n_images, out="figure6_divergence.png"):
                 arrowprops=dict(arrowstyle='->', color='#c77dff', lw=1.0))
     ax2.set_xlabel("PSNR (dB)", color=MUTED, fontsize=9)
     ax2.set_ylabel("SAM (°)", color=MUTED, fontsize=9)
-    ax2.set_title("PSNR vs SAM Divergensiyasi", color=TEXT, fontsize=10, fontweight='bold')
+    ax2.set_title("PSNR vs SAM Divergence", color=TEXT, fontsize=10, fontweight='bold')
     ax2.tick_params(colors=MUTED)
 
     # Panel 3: Divergensiya bar chart
@@ -1166,9 +1166,9 @@ def fig6_divergence(results, n_images, out="figure6_divergence.png"):
             bar.set_edgecolor('#c77dff'); bar.set_linewidth(3)
     ax3.set_xticks(xr)
     ax3.set_xticklabels(sl, fontsize=8, color=MUTED, rotation=40, ha='right')
-    ax3.set_ylabel("Maksimal divergensiya\n(8 metrika orasida)", color=MUTED, fontsize=9)
+    ax3.set_ylabel("Maximum divergence\n(across 8 metrics)", color=MUTED, fontsize=9)
     ax3.set_title(
-        "Har Bir Buzilish Turi Uchun Metrikalar Orasidagi Divergensiya (0=mos, 1=maksimal farq)",
+        "Inter-Metric Divergence per Distortion Type (0=consistent, 1=maximum disagreement)",
         color=TEXT, fontsize=10, fontweight='bold')
     ax3.set_ylim(0, 1.15); ax3.tick_params(colors=MUTED)
     patches = [mpatches.Patch(facecolor=v, label=k) for k, v in GRP_COLOR.items()]
@@ -1203,11 +1203,11 @@ def fig7_effectiveness(results, n_images, out="figure7_effectiveness.png"):
     fig, ax = plt.subplots(figsize=(14, 8), facecolor=BG)
     fig.subplots_adjust(left=0.19, right=0.88, top=0.88, bottom=0.14)
     fig.suptitle(
-        f"Metrikalar Samaradorlik Matritsasi  (8 Metrika, n={n_images}, avtomatik baho)",
+        f"Metrics Effectiveness Matrix  (8 Metrics, n={n_images}, automatic score)",
         fontsize=12, fontweight='bold', color=TEXT, y=0.97)
     fig.text(0.53, 0.93,
-             "3=★ A'lo (NM>0.75)  ·  2=✓ Yaxshi  ·  1=⚠ O'rtacha  ·  0=❌ Yanglishi mumkin  "
-             "·  Ballar normalizatsiyalangan qiymatdan avtomatik hisoblangan",
+             "3=★ Excellent (NM>0.75)  ·  2=✓ Good  ·  1=⚠ Fair  ·  0=❌ Poor  "
+             "·  Scores calculated automatically from normalized values",
              ha='center', fontsize=8, color=MUTED)
 
     cmap = mcolors.LinearSegmentedColormap.from_list(
@@ -1231,21 +1231,21 @@ def fig7_effectiveness(results, n_images, out="figure7_effectiveness.png"):
 
     # Yangi metrikalar ajratuvchi
     ax.axvline(5.5, color='#ffd166', linewidth=2, linestyle='--', alpha=0.7)
-    ax.text(6.5, -0.8, "Yangi metrikalar",
+    ax.text(6.5, -0.8, "New metrics",
             ha='center', fontsize=8, color='#ffd166', fontweight='bold')
 
     ax.set_xticks(range(len(METRICS)))
     ax.set_xticklabels(METRICS, color=TEXT, fontsize=10, fontweight='bold')
     ax.set_yticks(range(len(LABELS)))
-    sl = [l.replace("Gaussian", "G").replace("Kompressiya", "K")
-          .replace("Stripe", "Str").replace("Tuz-Murch", "Tuz-M") for l in LABELS]
+    sl = [l.replace("Gaussian", "G").replace("Compression", "K")
+          .replace("Stripe", "Str").replace("Salt-pepper", "Salt-p") for l in LABELS]
     ax.set_yticklabels(sl, fontsize=9)
     for ytick, g in zip(ax.get_yticklabels(), GROUPS):
         ytick.set_color(GRP_COLOR[g])
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
     cbar = plt.colorbar(im, ax=ax, pad=0.01, fraction=0.018, ticks=[0, 1, 2, 3])
-    cbar.set_ticklabels(["0: Yanglishi\nmumkin", "1: O'rtacha", "2: Yaxshi", "3: A'lo"])
+    cbar.set_ticklabels(["0: Poor", "1: Fair", "2: Good", "3: Excellent"])
     cbar.ax.tick_params(colors=MUTED, labelsize=8)
 
     plt.savefig(out, dpi=150, bbox_inches='tight', facecolor=BG)

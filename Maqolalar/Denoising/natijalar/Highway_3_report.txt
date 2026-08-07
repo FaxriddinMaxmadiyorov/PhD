@@ -1,0 +1,18 @@
+Fayl      : dataset/Highway/Highway_3.tif
+Strategiya: bm3d
+Kanallar  : 13
+
+   kanal          turi      sigma*           usul      AQI
+      B1           n/a    0.000026           bm3d        -
+      B2           n/a    0.001400           bm3d        -
+      B3           n/a    0.001719           bm3d        -
+      B4           n/a    0.001592           bm3d        -
+      B5           n/a    0.000052           bm3d        -
+      B6           n/a    0.000105           bm3d        -
+      B7           n/a    0.000123           bm3d        -
+      B8           n/a    0.007760           bm3d        -
+     B8A           n/a    0.000025           bm3d        -
+      B9           n/a    0.000008           bm3d        -
+     B10           n/a    0.000056           bm3d        -
+     B11           n/a    0.000046           bm3d        -
+     B12           n/a    0.000108           bm3d        -

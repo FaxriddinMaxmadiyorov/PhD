@@ -1,0 +1,18 @@
+Fayl      : dataset/Pasture/Pasture_3.tif
+Strategiya: bm3d
+Kanallar  : 13
+
+   kanal          turi      sigma*           usul      AQI
+      B1           n/a    0.000025           bm3d        -
+      B2           n/a    0.000595           bm3d        -
+      B3           n/a    0.000528           bm3d        -
+      B4           n/a    0.000509           bm3d        -
+      B5           n/a    0.000032           bm3d        -
+      B6           n/a    0.000043           bm3d        -
+      B7           n/a    0.000040           bm3d        -
+      B8           n/a    0.001684           bm3d        -
+     B8A           n/a    0.000027           bm3d        -
+      B9           n/a    0.000005           bm3d        -
+     B10           n/a    0.000030           bm3d        -
+     B11           n/a    0.000030           bm3d        -
+     B12           n/a    0.000047           bm3d        -

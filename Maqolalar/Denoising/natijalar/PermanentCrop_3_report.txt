@@ -1,0 +1,18 @@
+Fayl      : dataset/PermanentCrop/PermanentCrop_3.tif
+Strategiya: bm3d
+Kanallar  : 13
+
+   kanal          turi      sigma*           usul      AQI
+      B1           n/a    0.000028           bm3d        -
+      B2           n/a    0.003703           bm3d        -
+      B3           n/a    0.004316           bm3d        -
+      B4           n/a    0.005339           bm3d        -
+      B5           n/a    0.000098           bm3d        -
+      B6           n/a    0.000075           bm3d        -
+      B7           n/a    0.000091           bm3d        -
+      B8           n/a    0.003730           bm3d        -
+     B8A           n/a    0.000025           bm3d        -
+      B9           n/a    0.000006           bm3d        -
+     B10           n/a    0.000057           bm3d        -
+     B11           n/a    0.000088           bm3d        -
+     B12           n/a    0.000076           bm3d        -

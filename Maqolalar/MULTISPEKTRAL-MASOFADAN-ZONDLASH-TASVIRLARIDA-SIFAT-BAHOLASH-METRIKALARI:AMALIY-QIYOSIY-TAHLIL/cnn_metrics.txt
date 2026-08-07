@@ -1,0 +1,26 @@
+=======================================================
+CNN vs BRISQUE — PSNR BASHORAT TAQQOSLASH
+=======================================================
+
+Yondashuv              MAE (dB)    RMSE (dB)
+---------------------------------------------
+CNN (ResNet18)            2.984        4.865
+BRISQUE                  21.355       24.021
+
+CNN ustunligi: MAE da +18.371 dB yaxshi
+
+=======================================================
+CNN — BUZILISH TURLARI BO'YICHA MAE
+=======================================================
+  Blur_s1                   MAE=0.550 dB  (n=450)
+  Blur_s2                   MAE=0.825 dB  (n=450)
+  Blur_s3                   MAE=0.725 dB  (n=450)
+  Compress_20               MAE=11.675 dB  (n=450)
+  Compress_40               MAE=2.872 dB  (n=450)
+  Compress_60               MAE=3.343 dB  (n=450)
+  Gaussian_s002             MAE=6.793 dB  (n=450)
+  Gaussian_s005             MAE=2.793 dB  (n=450)
+  Gaussian_s010             MAE=0.533 dB  (n=450)
+  SaltPepper_p002           MAE=0.512 dB  (n=450)
+  Stripe_s002               MAE=4.352 dB  (n=450)
+  Stripe_s005               MAE=0.838 dB  (n=450)

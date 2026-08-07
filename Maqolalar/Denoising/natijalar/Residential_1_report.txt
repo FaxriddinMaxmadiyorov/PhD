@@ -1,0 +1,18 @@
+Fayl      : dataset/Residential/Residential_1.tif
+Strategiya: bm3d
+Kanallar  : 13
+
+   kanal          turi      sigma*           usul      AQI
+      B1           n/a    0.000023           bm3d        -
+      B2           n/a    0.003890           bm3d        -
+      B3           n/a    0.004305           bm3d        -
+      B4           n/a    0.006282           bm3d        -
+      B5           n/a    0.000082           bm3d        -
+      B6           n/a    0.000139           bm3d        -
+      B7           n/a    0.000173           bm3d        -
+      B8           n/a    0.011857           bm3d        -
+     B8A           n/a    0.000027           bm3d        -
+      B9           n/a    0.000010           bm3d        -
+     B10           n/a    0.000075           bm3d        -
+     B11           n/a    0.000084           bm3d        -
+     B12           n/a    0.000170           bm3d        -

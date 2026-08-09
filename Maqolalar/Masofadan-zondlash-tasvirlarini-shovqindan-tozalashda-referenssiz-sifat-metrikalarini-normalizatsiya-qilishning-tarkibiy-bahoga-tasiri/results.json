@@ -1,0 +1,36 @@
+{
+  "n_images": 42,
+  "n_samples": 1386,
+  "correlations": {
+    "M1_MAD": {
+      "spearman_vs_PSNR": -0.9957,
+      "pearson_vs_PSNR": -0.9238,
+      "min": 11.947,
+      "max": 180.193
+    },
+    "M2_LapEnergy": {
+      "spearman_vs_PSNR": -0.994,
+      "pearson_vs_PSNR": -0.829,
+      "min": 193.438,
+      "max": 30761.871
+    },
+    "M3_Entropy": {
+      "spearman_vs_PSNR": -0.8223,
+      "pearson_vs_PSNR": -0.7884,
+      "min": 5.902,
+      "max": 7.775
+    },
+    "Composite_raw": {
+      "spearman_vs_PSNR": -0.9941,
+      "pearson_vs_PSNR": -0.8296,
+      "min": 70.541,
+      "max": 10316.488
+    },
+    "Composite_normalized": {
+      "spearman_vs_PSNR": -0.9707,
+      "pearson_vs_PSNR": -0.8935,
+      "min": 0.006,
+      "max": 0.985
+    }
+  }
+}

@@ -1,13 +1,32 @@
 package main
 
-
 import "fmt"
-import "unicode/utf8"
+
+type Greeter interface {
+	LanguageName() string
+	Greet(name string) string
+}
+
+func SayHello(name string, g Greeter) string {
+	return fmt.Sprintf(
+		"I can speak %s: %s",
+		g.LanguageName(),
+		g.Greet(name),
+	)
+}
+
+type GermanGreeter struct{}
+
+func (GermanGreeter) LanguageName() string {
+	return "German"
+}
+
+func (GermanGreeter) Greet(name string) string {
+	return fmt.Sprintf("Hallo %s!", name)
+}
 
 func main() {
-	myString := "❗hello"
-	stringLength := len(myString)
-	numberOfRunes := utf8.RuneCountInString(myString)
+	germanGreeter := GermanGreeter{}
 
-	fmt.Printf("myString - Length: %d - Runes: %d\n", stringLength, numberOfRunes)
+	fmt.Println(SayHello("Dietrich", germanGreeter))
 }

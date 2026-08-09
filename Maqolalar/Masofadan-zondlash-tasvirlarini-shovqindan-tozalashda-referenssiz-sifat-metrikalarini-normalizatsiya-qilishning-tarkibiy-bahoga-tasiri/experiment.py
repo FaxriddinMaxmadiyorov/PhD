@@ -160,9 +160,13 @@ for name, vec in [('M1_MAD', M1), ('M2_LapEnergy', M2), ('M3_Entropy', M3),
 
 print(json.dumps(results, indent=2, ensure_ascii=False))
 
+image_ids = {os.path.basename(d['path']): i for i, d in enumerate(dataset)}
+IMG_ID = np.array([image_ids[r['image']] for r in records])
+
 np.savez('data.npz',
           sigmas=np.array(sigmas), M1=M1, M2=M2, M3=M3, PSNR=PSNR,
-          composite_raw=composite_raw, composite_norm=composite_norm)
+          composite_raw=composite_raw, composite_norm=composite_norm,
+          image_id=IMG_ID, n_images=len(dataset))
 
 with open('results.json', 'w', encoding='utf-8') as f:
     json.dump(dict(n_images=len(dataset), n_samples=len(records), correlations=results), f,

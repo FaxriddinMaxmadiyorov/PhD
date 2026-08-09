@@ -21,10 +21,11 @@ for ax, vals, lab in zip(axes, values, labels):
                whiskerprops=dict(color='0.2'), capprops=dict(color='0.2'))
     ax.set_title(lab, fontsize=9)
     ax.set_xticks([])
+    ax.set_yscale('log')
     ax.tick_params(labelsize=8)
-    ax.grid(axis='y', linestyle=':', color='0.7', linewidth=0.6)
+    ax.grid(axis='y', linestyle=':', color='0.7', linewidth=0.6, which='both')
 
-fig.suptitle("Uch metrikaning xom qiymatlar diapazoni (miqyoslar mos kelmaydi)", fontsize=10)
+fig.suptitle("Uch metrikaning xom qiymatlar diapazoni (logarifmik shkala, miqyoslar mos kelmaydi)", fontsize=10)
 plt.tight_layout(rect=[0, 0, 1, 0.93])
 plt.savefig('fig1_metric_ranges.png', dpi=200)
 print("saved fig1")

@@ -1,0 +1,14 @@
+{
+  "n_bootstrap": 2000,
+  "r_raw_point": -0.8296,
+  "r_raw_ci95": [
+    -0.8299,
+    -0.8293
+  ],
+  "r_norm_point": -0.8935,
+  "r_norm_ci95": [
+    -0.8996,
+    -0.8883
+  ],
+  "prob_normalized_composite_stronger": 1.0
+}

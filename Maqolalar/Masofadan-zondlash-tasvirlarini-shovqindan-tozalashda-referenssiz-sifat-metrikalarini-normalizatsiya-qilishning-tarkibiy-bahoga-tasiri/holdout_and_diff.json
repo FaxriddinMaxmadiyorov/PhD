@@ -1,0 +1,24 @@
+{
+  "holdout_cv": {
+    "n_folds": 5,
+    "fold_r": [
+      -0.8981,
+      -0.8967,
+      -0.8951,
+      -0.893,
+      -0.8842
+    ],
+    "r_insample": -0.8935,
+    "r_oof_pooled": -0.8913,
+    "r_raw_reference": -0.8296
+  },
+  "paired_bootstrap": {
+    "n_bootstrap": 2000,
+    "delta_abs_r_mean": 0.0643,
+    "delta_abs_r_ci95": [
+      0.0588,
+      0.07
+    ],
+    "p_one_sided": 0.0
+  }
+}
